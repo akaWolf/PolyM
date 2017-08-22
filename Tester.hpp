@@ -26,44 +26,44 @@
 
 void test(bool a, const char* exp, const char* file, int line)
 {
-    if (!a)
-    {
-        std::cout << file << ":" << line << ": TEST FAILED: " << exp << std::endl;
-        exit(1);
-    }
+	if (!a)
+	{
+		std::cout << file << ":" << line << ": TEST FAILED: " << exp << std::endl;
+		exit(1);
+	}
 }
 
 template <class C> void testEquals(C a, C b, const char* file, int line)
 {
-    if (a != b)
-    {
-        std::cout << file << ":" << line << ": TEST FAILED: " << a << " == " << b << std::endl;
-        exit(1);
-    }
+	if (a != b)
+	{
+		std::cout << file << ":" << line << ": TEST FAILED: " << a << " == " << b << std::endl;
+		exit(1);
+	}
 }
 
 template <class C> void testNotEquals(C a, C b, const char* file, int line)
 {
-    if (a == b)
-    {
-        std::cout << file << ":" << line << ": TEST FAILED: " << a << " != " << b << std::endl;
-        exit(1);
-    }
+	if (a == b)
+	{
+		std::cout << file << ":" << line << ": TEST FAILED: " << a << " != " << b << std::endl;
+		exit(1);
+	}
 }
 
 template <class C> void testLessThan(C a, C b, const char* file, int line)
 {
-    if (a >= b)
-    {
-        std::cout << file << ":" << line << ": TEST FAILED: " << a << " < " << b << std::endl;
-        exit(1);
-    }
+	if (a >= b)
+	{
+		std::cout << file << ":" << line << ": TEST FAILED: " << a << " < " << b << std::endl;
+		exit(1);
+	}
 }
 
 void testFail(const char* msg, const char* file, int line)
 {
-    std::cout << file << ":" << line << ": TEST FAILED: " << msg << std::endl;
-    exit(1);
+	std::cout << file << ":" << line << ": TEST FAILED: " << msg << std::endl;
+	exit(1);
 }
 
 /**
@@ -74,44 +74,44 @@ void testFail(const char* msg, const char* file, int line)
 class Tester
 {
 public:
-    /**
-     * Construct a Tester.
-     *
-     * @param name Name for the Tester instance. Will be printed when running tests.
-     */
-    Tester(const std::string& name)
-      : name_(name), tests_()
-    {
-    }
+	/**
+	 * Construct a Tester.
+	 *
+	 * @param name Name for the Tester instance. Will be printed when running tests.
+	 */
+	Tester(const std::string& name)
+		: name_(name), tests_()
+	{
+	}
 
-    /**
-     * Add test.
-     *
-     * @param testFunc Function containing the test.
-     * @param testDesc Description for the test. Will be printed when running the test.
-     */
-    void addTest(const std::function<void()>& testFunc, const std::string& testDesc)
-    {
-        tests_.push_back(std::make_pair(testFunc, testDesc));
-    }
+	/**
+	 * Add test.
+	 *
+	 * @param testFunc Function containing the test.
+	 * @param testDesc Description for the test. Will be printed when running the test.
+	 */
+	void addTest(const std::function<void()>& testFunc, const std::string& testDesc)
+	{
+		tests_.push_back(std::make_pair(testFunc, testDesc));
+	}
 
-    /**
-     * Run all added tests.
-     */
-    void runTests() const
-    {
-        std::cout << name_ << ": Running " << tests_.size() << " tests" << std::endl;
-        for (auto& test : tests_)
-        {
-            std::cout << test.second << "... ";
-            test.first();
-            std::cout << "OK!" << std::endl;
-        }
-    }
+	/**
+	 * Run all added tests.
+	 */
+	void runTests() const
+	{
+		std::cout << name_ << ": Running " << tests_.size() << " tests" << std::endl;
+		for (auto& test : tests_)
+		{
+			std::cout << test.second << "... ";
+			test.first();
+			std::cout << "OK!" << std::endl;
+		}
+	}
 
 private:
-    std::string name_;
-    std::vector<std::pair<std::function<void()>, std::string>> tests_;
+	std::string name_;
+	std::vector<std::pair<std::function<void()>, std::string>> tests_;
 };
 
 #endif
