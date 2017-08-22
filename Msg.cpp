@@ -1,6 +1,8 @@
 #include "Msg.hpp"
 
-#include <atomic>
+#include <cmsis-plus/estd/mutex>
+
+using namespace os::estd;
 
 namespace PolyM {
 
@@ -8,7 +10,9 @@ namespace {
 
 MsgUID generateUniqueId()
 {
-	static std::atomic<MsgUID> i(0);
+	static mutex uidMutex;
+	lock_guard<mutex> lock(uidMutex);
+	static MsgUID i(0);
 	return ++i;
 }
 
